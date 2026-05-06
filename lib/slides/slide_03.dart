@@ -92,6 +92,9 @@ class _Slide03State extends State<Slide03History>
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final s = (size.width / 1920.0).clamp(0.40, 1.6);
+
     return Container(
       key: const ValueKey('slide_03'),
       decoration: const BoxDecoration(
@@ -107,11 +110,11 @@ class _Slide03State extends State<Slide03History>
 
           // Glow orb – top right (mirrored from slide 02)
           Positioned(
-            top: -80,
-            right: 80,
+            top: -80 * s,
+            right: 80 * s,
             child: Container(
-              width: 320,
-              height: 320,
+              width: 320 * s,
+              height: 320 * s,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(colors: [
@@ -123,7 +126,7 @@ class _Slide03State extends State<Slide03History>
           ),
 
           Padding(
-            padding: const EdgeInsets.fromLTRB(72, 44, 72, 36),
+            padding: EdgeInsets.fromLTRB(72 * s, 44 * s, 72 * s, 36 * s),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -137,16 +140,16 @@ class _Slide03State extends State<Slide03History>
                       children: [
                         const _SlideLabel2(
                             topic: 'CONSERVANȚI CHIMICI · 2026'),
-                        const SizedBox(height: 18),
+                        SizedBox(height: 18 * s),
                         ShaderMask(
                           shaderCallback: (b) => const LinearGradient(
                             colors: [Colors.white, Color(0xFF90D8FF)],
                           ).createShader(b),
-                          child: const Text(
+                          child: Text(
                             'Clasificarea\nConservanților Chimici',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 76,
+                              fontSize: 76 * s,
                               fontWeight: FontWeight.w900,
                               height: 1.05,
                               letterSpacing: -1.5,
@@ -159,29 +162,32 @@ class _Slide03State extends State<Slide03History>
                     // Aici am înlocuit cardurile KPI cu cardurile pentru formule
                     Row(
                       children: [
-                        const _FormulaCard(
+                        _FormulaCard(
                           formula: 'C₇H₆O₂', // Formula brută pentru Acidul Benzoic
                           label: 'Acid Benzoic\n(E210)',
-                          color: Color(0xFF00F0FF),
+                          color: const Color(0xFF00F0FF),
+                          scale: s,
                         ).animate().fadeIn(duration: 600.ms, delay: 300.ms),
-                        const SizedBox(width: 16),
-                        const _FormulaCard(
+                        SizedBox(width: 16 * s),
+                        _FormulaCard(
                           formula: 'C₆H₈O₂', // Formula brută pentru Acidul Sorbic
                           label: 'Acid Sorbic\n(E200)',
-                          color: Color(0xFF00FF88),
+                          color: const Color(0xFF00FF88),
+                          scale: s,
                         ).animate().fadeIn(duration: 600.ms, delay: 450.ms),
-                        const SizedBox(width: 16),
-                        const _FormulaCard(
+                        SizedBox(width: 16 * s),
+                        _FormulaCard(
                           formula: 'NaNO₂', // Formula pentru Nitritul de Sodiu
                           label: 'Nitrit de Sodiu\n(E250)',
-                          color: Color(0xFFFFCC00),
+                          color: const Color(0xFFFFCC00),
+                          scale: s,
                         ).animate().fadeIn(duration: 600.ms, delay: 600.ms),
                       ],
                     ),
                   ],
                 ),
 
-                const SizedBox(height: 28),
+                SizedBox(height: 28 * s),
 
                 // ── BODY ───────────────────────────────────────────────────
                 Expanded(
@@ -197,12 +203,13 @@ class _Slide03State extends State<Slide03History>
                             _SectionHeader(
                               label: '2  CLASIFICARE DUPĂ NATURĂ CHIMICĂ',
                               color: const Color(0xFF00F0FF),
+                              scale: s,
                             ).animate().fadeIn(duration: 500.ms, delay: 500.ms),
-                            const SizedBox(height: 10),
-                            _TableColumnHeaders()
+                            SizedBox(height: 10 * s),
+                            _TableColumnHeaders(scale: s)
                                 .animate()
                                 .fadeIn(duration: 500.ms, delay: 650.ms),
-                            const SizedBox(height: 6),
+                            SizedBox(height: 6 * s),
                             Expanded(
                               child: AnimatedBuilder(
                                 animation: _cardsCtrl,
@@ -219,14 +226,16 @@ class _Slide03State extends State<Slide03History>
                                         return Expanded(
                                           child: Padding(
                                             padding:
-                                            const EdgeInsets.only(bottom: 6),
+                                            EdgeInsets.only(bottom: 6 * s),
                                             child: Opacity(
                                               opacity: progress,
                                               child: Transform.translate(
                                                 offset:
                                                 Offset(28 * (1 - progress), 0),
                                                 child: _ChemGroupRow(
-                                                    group: _chemGroups[i]),
+                                                  group: _chemGroups[i],
+                                                  scale: s,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -250,8 +259,9 @@ class _Slide03State extends State<Slide03History>
                             _SectionHeader(
                               label: '2.1  CLASIFICARE DUPĂ MODUL DE ACȚIUNE',
                               color: const Color(0xFF00FF88),
+                              scale: s,
                             ).animate().fadeIn(duration: 500.ms, delay: 500.ms),
-                            const SizedBox(height: 10),
+                            SizedBox(height: 10 * s),
                             Expanded(
                               child: AnimatedBuilder(
                                 animation: _cardsCtrl,
@@ -268,15 +278,17 @@ class _Slide03State extends State<Slide03History>
                                     return Expanded(
                                       child: Padding(
                                         padding:
-                                        const EdgeInsets.only(bottom: 10),
+                                        EdgeInsets.only(bottom: 10 * s),
                                         child: Opacity(
                                           opacity: progress,
                                           child: Transform.translate(
                                             offset:
                                             Offset(0, 20 * (1 - progress)),
                                             child: _MechanismCard(
-                                                mechanism:
-                                                _actionMechanisms[i]),
+                                              mechanism:
+                                              _actionMechanisms[i],
+                                              scale: s,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -305,23 +317,25 @@ class _Slide03State extends State<Slide03History>
 class _SectionHeader extends StatelessWidget {
   final String label;
   final Color color;
-  const _SectionHeader({required this.label, required this.color});
+  final double scale;
+  const _SectionHeader({required this.label, required this.color, this.scale = 1.0});
 
   @override
   Widget build(BuildContext context) {
+    final s = scale;
     return Row(
       children: [
         Container(
             width: 3,
-            height: 16,
+            height: 16 * s,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(2), color: color)),
-        const SizedBox(width: 10),
+        SizedBox(width: 10 * s),
         Text(
           label,
           style: TextStyle(
             color: color.withOpacity(0.85),
-            fontSize: 18,
+            fontSize: 18 * s,
             fontWeight: FontWeight.w700,
             letterSpacing: 2.2,
           ),
@@ -332,15 +346,19 @@ class _SectionHeader extends StatelessWidget {
 }
 
 class _TableColumnHeaders extends StatelessWidget {
+  final double scale;
+  const _TableColumnHeaders({this.scale = 1.0});
+
   @override
   Widget build(BuildContext context) {
-    const style = TextStyle(
-        color: Color(0xFF3A5070),
-        fontSize: 17,
+    final s = scale;
+    final style = TextStyle(
+        color: const Color(0xFF3A5070),
+        fontSize: 17 * s,
         fontWeight: FontWeight.w700,
         letterSpacing: 1.5);
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 2, 8, 2),
+      padding: EdgeInsets.fromLTRB(16 * s, 2, 8 * s, 2),
       child: Row(
         children: [
           Expanded(flex: 22, child: Text('GRUPĂ CHIMICĂ', style: style)),
@@ -355,13 +373,15 @@ class _TableColumnHeaders extends StatelessWidget {
 
 class _ChemGroupRow extends StatelessWidget {
   final _ChemGroup group;
-  const _ChemGroupRow({required this.group});
+  final double scale;
+  const _ChemGroupRow({required this.group, this.scale = 1.0});
 
   @override
   Widget build(BuildContext context) {
+    final s = scale;
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 12 * s, vertical: 8 * s),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
         border: Border.all(color: group.color.withOpacity(0.22)),
@@ -370,9 +390,9 @@ class _ChemGroupRow extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 4,
+            width: 4 * s,
             height: double.infinity,
-            constraints: const BoxConstraints(minHeight: 22),
+            constraints: BoxConstraints(minHeight: 22 * s),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2),
               color: group.color,
@@ -381,14 +401,14 @@ class _ChemGroupRow extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 10),
+          SizedBox(width: 10 * s),
           Expanded(
             flex: 22,
             child: Text(
               group.group,
               style: TextStyle(
                   color: group.color,
-                  fontSize: 17,
+                  fontSize: 17 * s,
                   fontWeight: FontWeight.w700),
             ),
           ),
@@ -398,7 +418,7 @@ class _ChemGroupRow extends StatelessWidget {
               group.examples,
               style: TextStyle(
                   color: group.color.withOpacity(0.7),
-                  fontSize: 18,
+                  fontSize: 18 * s,
                   fontWeight: FontWeight.w600,
                   letterSpacing: 0.3),
             ),
@@ -408,7 +428,7 @@ class _ChemGroupRow extends StatelessWidget {
             child: Text(
               group.foods,
               style: TextStyle(
-                  color: Colors.white.withOpacity(0.55), fontSize: 16),
+                  color: Colors.white.withOpacity(0.55), fontSize: 16 * s),
             ),
           ),
           Expanded(
@@ -417,7 +437,7 @@ class _ChemGroupRow extends StatelessWidget {
               group.mechanism,
               style: TextStyle(
                   color: Colors.white.withOpacity(0.4),
-                  fontSize: 18,
+                  fontSize: 16 * s,
                   height: 1.3),
             ),
           ),
@@ -429,13 +449,15 @@ class _ChemGroupRow extends StatelessWidget {
 
 class _MechanismCard extends StatelessWidget {
   final _ActionMechanism mechanism;
-  const _MechanismCard({required this.mechanism});
+  final double scale;
+  const _MechanismCard({required this.mechanism, this.scale = 1.0});
 
   @override
   Widget build(BuildContext context) {
+    final s = scale;
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      padding: EdgeInsets.symmetric(horizontal: 16 * s, vertical: 14 * s),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: mechanism.color.withOpacity(0.3)),
@@ -445,8 +467,8 @@ class _MechanismCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: 42,
-            height: 42,
+            width: 42 * s,
+            height: 42 * s,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
@@ -458,12 +480,12 @@ class _MechanismCard extends StatelessWidget {
                 mechanism.number,
                 style: TextStyle(
                     color: mechanism.color,
-                    fontSize: 23,
+                    fontSize: 23 * s,
                     fontWeight: FontWeight.w900),
               ),
             ),
           ),
-          const SizedBox(width: 14),
+          SizedBox(width: 14 * s),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -471,30 +493,34 @@ class _MechanismCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Text(
-                      mechanism.title,
-                      style: TextStyle(
-                          color: mechanism.color,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w800),
+                    Flexible(
+                      child: Text(
+                        mechanism.title,
+                        style: TextStyle(
+                            color: mechanism.color,
+                            fontSize: 18 * s,
+                            fontWeight: FontWeight.w800),
+                      ),
                     ),
-                    const SizedBox(width: 8),
-                    Text(
-                      mechanism.tag,
-                      style: TextStyle(
-                          color: mechanism.color.withOpacity(0.45),
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 0.5),
+                    SizedBox(width: 8 * s),
+                    Flexible(
+                      child: Text(
+                        mechanism.tag,
+                        style: TextStyle(
+                            color: mechanism.color.withOpacity(0.45),
+                            fontSize: 15 * s,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.5),
+                      ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4 * s),
                 Text(
                   mechanism.description,
                   style: TextStyle(
                       color: Colors.white.withOpacity(0.5),
-                      fontSize: 19,
+                      fontSize: 15 * s,
                       height: 1.4),
                 ),
               ],
@@ -505,7 +531,6 @@ class _MechanismCard extends StatelessWidget {
     );
   }
 }
-
 // ── SHARED WIDGETS ────────────────────────────────────────────────────────────
 
 // Am înlocuit _KpiCard cu _FormulaCard
@@ -513,18 +538,21 @@ class _FormulaCard extends StatelessWidget {
   final String formula;
   final String label;
   final Color color;
+  final double scale;
 
   const _FormulaCard({
     required this.formula,
     required this.label,
     required this.color,
+    this.scale = 1.0,
   });
 
   @override
   Widget build(BuildContext context) {
+    final s = scale;
     return Container(
-      width: 190,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+      width: 190 * s,
+      padding: EdgeInsets.symmetric(horizontal: 20 * s, vertical: 18 * s),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: color.withOpacity(0.35)),
@@ -536,14 +564,14 @@ class _FormulaCard extends StatelessWidget {
           Text(formula,
               style: TextStyle(
                   color: color,
-                  fontSize: 40,
+                  fontSize: 40 * s,
                   fontWeight: FontWeight.w900,
                   letterSpacing: 1.5)),
-          const SizedBox(height: 8),
+          SizedBox(height: 8 * s),
           Text(label,
               style: TextStyle(
                   color: Colors.white.withOpacity(0.55),
-                  fontSize: 17,
+                  fontSize: 17 * s,
                   height: 1.3)),
         ],
       ),
@@ -557,17 +585,18 @@ class _SlideLabel2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = (MediaQuery.of(context).size.width / 1920.0).clamp(0.40, 1.6);
     return Row(
       children: [
         Container(
             width: 1,
-            height: 18,
+            height: 18 * s,
             color: const Color(0xFF00FF88).withOpacity(0.4)),
-        const SizedBox(width: 10),
+        SizedBox(width: 10 * s),
         Text(topic,
             style: TextStyle(
                 color: Colors.white.withOpacity(0.45),
-                fontSize: 19,
+                fontSize: 19 * s,
                 letterSpacing: 3)),
       ],
     );

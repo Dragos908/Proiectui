@@ -633,59 +633,13 @@ class _PhotoPlaceholder09Full extends StatelessWidget {
           color: _cyan.withOpacity(0.35),
           width: 1.5,
         ),
-        color: _cyan.withOpacity(0.04),
       ),
-      child: Stack(
-        children: [
-          Positioned(top: 10, left: 10,
-              child: _CornerMark09(color: _cyan)),
-          Positioned(top: 10, right: 10,
-              child: Transform(
-                alignment: Alignment.center,
-                transform: Matrix4.rotationY(3.14159),
-                child: _CornerMark09(color: _cyan),
-              )),
-          Positioned(bottom: 10, left: 10,
-              child: Transform(
-                alignment: Alignment.center,
-                transform: Matrix4.rotationX(3.14159),
-                child: _CornerMark09(color: _cyan),
-              )),
-          Positioned(bottom: 10, right: 10,
-              child: Transform(
-                alignment: Alignment.center,
-                transform: Matrix4.rotationY(0)..rotateZ(3.14159),
-                child: _CornerMark09(color: _cyan),
-              )),
-          Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.add_photo_alternate_outlined,
-                    color: _cyan.withOpacity(0.50), size: 52),
-                const SizedBox(height: 12),
-                Text(
-                  'INSERAȚI FOTOGRAFIA AICI',
-                  style: TextStyle(
-                    color: _cyan.withOpacity(0.50),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 2.0,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  'Recomandat: 9 : 16 · min. 450 × 800 px',
-                  style: TextStyle(
-                    color: _cyan.withOpacity(0.30),
-                    fontSize: 11,
-                    letterSpacing: 0.5,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Image.asset(
+          'assets/images/2.jpg', // ← schimbă cu numele fișierului tău
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

@@ -390,7 +390,7 @@ class _S00State extends State<Slide00Intro>
                     ),
                     SizedBox(height: 6 * s),
                     Text(
-                      'Dragoș',
+                      'Dragoș Constantinov',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 22 * s,

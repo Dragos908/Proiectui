@@ -338,6 +338,8 @@ class _S04State extends State<Slide04Milestones>
   @override
   Widget build(BuildContext context) {
     final page = _pages[_pageIndex];
+    final size = MediaQuery.of(context).size;
+    final s = (size.width / 1920.0).clamp(0.40, 1.6);
 
     return Container(
       key: const ValueKey('slide_04'),
@@ -368,7 +370,7 @@ class _S04State extends State<Slide04Milestones>
           top: -100, right: -60,
           child: IgnorePointer(
             child: Container(
-              width: 500, height: 500,
+              width: 500 * s, height: 500 * s,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(colors: [
@@ -383,7 +385,7 @@ class _S04State extends State<Slide04Milestones>
           bottom: -80, left: 40,
           child: IgnorePointer(
             child: Container(
-              width: 400, height: 400,
+              width: 400 * s, height: 400 * s,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(colors: [
@@ -397,7 +399,7 @@ class _S04State extends State<Slide04Milestones>
 
         // ── MAIN CONTENT ───────────────────────────────────────────────────
         Padding(
-          padding: const EdgeInsets.fromLTRB(32, 20, 40, 20),
+          padding: EdgeInsets.fromLTRB(32 * s, 20 * s, 40 * s, 20 * s),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -435,13 +437,13 @@ class _S04State extends State<Slide04Milestones>
                                     children: [
                                       Icon(page.icon,
                                           color: page.accentColor.withOpacity(0.4),
-                                          size: 64),
-                                      const SizedBox(height: 12),
+                                          size: 64 * s),
+                                      SizedBox(height: 12 * s),
                                       Text(
                                         page.range,
                                         style: TextStyle(
                                           color: page.accentColor.withOpacity(0.5),
-                                          fontSize: 16,
+                                          fontSize: 16 * s,
                                           fontWeight: FontWeight.w700,
                                           letterSpacing: 2,
                                         ),
@@ -461,7 +463,7 @@ class _S04State extends State<Slide04Milestones>
                               child: Center(
                                 child: Icon(page.icon,
                                     color: page.accentColor.withOpacity(0.4),
-                                    size: 64),
+                                    size: 64 * s),
                               ),
                             ),
                           ),
@@ -484,21 +486,21 @@ class _S04State extends State<Slide04Milestones>
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.all(10),
+                                  padding: EdgeInsets.all(10 * s),
                                   decoration: BoxDecoration(
                                     color: page.accentColor.withOpacity(0.13),
                                     shape: BoxShape.circle,
                                   ),
-                                  child: Icon(page.icon, color: page.accentColor, size: 22),
+                                  child: Icon(page.icon, color: page.accentColor, size: 22 * s),
                                 ),
-                                const SizedBox(width: 14),
+                                SizedBox(width: 14 * s),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 10, vertical: 3),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10 * s, vertical: 3 * s),
                                         decoration: BoxDecoration(
                                           color: page.accentColor.withOpacity(0.12),
                                           borderRadius: BorderRadius.circular(4),
@@ -507,11 +509,11 @@ class _S04State extends State<Slide04Milestones>
                                         ),
                                         child: Text(page.range, style: TextStyle(
                                           color: page.accentColor,
-                                          fontSize: 11, fontWeight: FontWeight.w900,
+                                          fontSize: 11 * s, fontWeight: FontWeight.w900,
                                           letterSpacing: 2,
                                         )),
                                       ),
-                                      const SizedBox(height: 3),
+                                      SizedBox(height: 3 * s),
                                       ShaderMask(
                                         shaderCallback: (b) => LinearGradient(
                                           colors: [Colors.white, page.accentColor.withOpacity(0.8)],
@@ -520,21 +522,21 @@ class _S04State extends State<Slide04Milestones>
                                           page.title,
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 20,
+                                            fontSize: 20 * s,
                                             fontWeight: FontWeight.w900,
                                             height: 1.1,
                                             letterSpacing: -0.5,
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(height: 2),
+                                      SizedBox(height: 2 * s),
                                       Text(
                                         page.description,
                                         style: TextStyle(
                                           color: page.accentColor.withOpacity(0.65),
-                                          fontSize: 11,
+                                          fontSize: 11 * s,
                                           fontWeight: FontWeight.w300,
                                         ),
                                         maxLines: 2,
@@ -556,6 +558,7 @@ class _S04State extends State<Slide04Milestones>
                               child: _ETable(
                                 key: ValueKey(_pageIndex),
                                 page: page,
+                                scale: s,
                               ),
                             ),
                           ),
@@ -574,13 +577,12 @@ class _S04State extends State<Slide04Milestones>
                                 color: page.accentColor,
                               ),
 
-                              // Corectare HitTestBehavior și UI pentru butonul de redare/pauză
                               GestureDetector(
                                 onTap: _toggleAutoPlay,
-                                behavior: HitTestBehavior.opaque, // Asigură preluarea click-urilor perfect
+                                behavior: HitTestBehavior.opaque,
                                 child: AnimatedContainer(
                                   duration: const Duration(milliseconds: 200),
-                                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 20 * s, vertical: 10 * s),
                                   decoration: BoxDecoration(
                                     color: _isAutoPlaying
                                         ? page.accentColor.withOpacity(0.12)
@@ -597,21 +599,21 @@ class _S04State extends State<Slide04Milestones>
                                     children: [
                                       Icon(
                                         _isAutoPlaying
-                                            ? Icons.pause_rounded // Schimbat iconița pentru a semnifica mai clar funcția de pauză
+                                            ? Icons.pause_rounded
                                             : Icons.play_arrow_rounded,
                                         color: _isAutoPlaying
                                             ? page.accentColor
                                             : Colors.white.withOpacity(0.55),
-                                        size: 18,
+                                        size: 18 * s,
                                       ),
-                                      const SizedBox(width: 8),
+                                      SizedBox(width: 8 * s),
                                       Text(
-                                        _isAutoPlaying ? "Pauză" : "Redare", // Adăugat text pentru zonă de contact mai mare
+                                        _isAutoPlaying ? "Pauză" : "Redare",
                                         style: TextStyle(
                                           color: _isAutoPlaying
                                               ? page.accentColor
                                               : Colors.white.withOpacity(0.55),
-                                          fontSize: 13,
+                                          fontSize: 13 * s,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -746,7 +748,7 @@ class _ImageFrame extends StatelessWidget {
                     label,
                     style: TextStyle(
                       color: accentColor,
-                      fontSize: 11,
+                      fontSize: 11 * (MediaQuery.of(context).size.width / 1920.0).clamp(0.40, 1.6),
                       fontWeight: FontWeight.w900,
                       letterSpacing: 1.5,
                     ),
@@ -768,29 +770,30 @@ class _ImagePlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = (MediaQuery.of(context).size.width / 1920.0).clamp(0.40, 1.6);
     return Container(
       color: accentColor.withOpacity(0.04),
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.image_outlined, color: accentColor.withOpacity(0.25), size: 52),
-            const SizedBox(height: 12),
+            Icon(Icons.image_outlined, color: accentColor.withOpacity(0.25), size: 52 * s),
+            SizedBox(height: 12 * s),
             Text(
               label,
               style: TextStyle(
                 color: accentColor.withOpacity(0.40),
-                fontSize: 13,
+                fontSize: 13 * s,
                 fontWeight: FontWeight.w700,
                 letterSpacing: 2,
               ),
             ),
-            const SizedBox(height: 6),
+            SizedBox(height: 6 * s),
             Text(
               'assets/images/',
               style: TextStyle(
                 color: accentColor.withOpacity(0.22),
-                fontSize: 10,
+                fontSize: 10 * s,
                 letterSpacing: 0.5,
               ),
             ),
@@ -804,10 +807,12 @@ class _ImagePlaceholder extends StatelessWidget {
 // ── E TABLE WIDGET ────────────────────────────────────────────────────────────
 class _ETable extends StatelessWidget {
   final _EPage page;
-  const _ETable({super.key, required this.page});
+  final double scale;
+  const _ETable({super.key, required this.page, this.scale = 1.0});
 
   @override
   Widget build(BuildContext context) {
+    final s = scale;
     return Container(
       decoration: BoxDecoration(
         color: page.accentColor.withOpacity(0.03),
@@ -825,7 +830,7 @@ class _ETable extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 11),
+              padding: EdgeInsets.symmetric(horizontal: 20 * s, vertical: 11 * s),
               decoration: BoxDecoration(
                 color: page.accentColor.withOpacity(0.10),
                 border: Border(
@@ -833,10 +838,10 @@ class _ETable extends StatelessWidget {
                 ),
               ),
               child: Row(children: [
-                _HeaderCell('Cod E', flex: 2, color: page.accentColor),
-                _HeaderCell('Denumire chimica', flex: 3, color: page.accentColor),
-                _HeaderCell('Alimente tipice', flex: 4, color: page.accentColor),
-                _HeaderCell('Structura', flex: 2, color: page.accentColor, alignRight: true),
+                _HeaderCell('Cod E', flex: 2, color: page.accentColor, scale: s),
+                _HeaderCell('Denumire chimica', flex: 3, color: page.accentColor, scale: s),
+                _HeaderCell('Alimente tipice', flex: 4, color: page.accentColor, scale: s),
+                _HeaderCell('Structura', flex: 2, color: page.accentColor, alignRight: true, scale: s),
               ]),
             ),
             Expanded(
@@ -848,8 +853,8 @@ class _ETable extends StatelessWidget {
                   final row = page.rows[i];
                   final isEven = i % 2 == 0;
                   return Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 20 * s, vertical: 10 * s),
                     decoration: BoxDecoration(
                       color: isEven
                           ? Colors.transparent
@@ -860,15 +865,15 @@ class _ETable extends StatelessWidget {
                         ),
                       ),
                     ),
-                    constraints: const BoxConstraints(minHeight: 48),
+                    constraints: BoxConstraints(minHeight: 48 * s),
                     child: Row(children: [
                       Expanded(
                         flex: 2,
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 3),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8 * s, vertical: 3 * s),
                             decoration: BoxDecoration(
                               color: page.accentColor.withOpacity(0.10),
                               borderRadius: BorderRadius.circular(6),
@@ -877,32 +882,32 @@ class _ETable extends StatelessWidget {
                             ),
                             child: Text(row.code, style: TextStyle(
                               color: page.accentColor,
-                              fontSize: 14,
+                              fontSize: 14 * s,
                               fontWeight: FontWeight.w900,
                               letterSpacing: 0.5,
                             )),
                           ),
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12 * s),
                       Expanded(
                         flex: 3,
-                        child: Text(row.name, style: const TextStyle(
+                        child: Text(row.name, style: TextStyle(
                           color: Colors.white,
-                          fontSize: 15,
+                          fontSize: 15 * s,
                           fontWeight: FontWeight.w500,
                         )),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12 * s),
                       Expanded(
                         flex: 4,
                         child: Text(row.foods, style: TextStyle(
                           color: Colors.white.withOpacity(0.60),
-                          fontSize: 13,
+                          fontSize: 13 * s,
                           fontWeight: FontWeight.w400,
                         )),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12 * s),
                       Expanded(
                         flex: 2,
                         child: Align(
@@ -911,7 +916,7 @@ class _ETable extends StatelessWidget {
                             row.formula,
                             style: TextStyle(
                               color: page.accentColor.withOpacity(0.90),
-                              fontSize: 18,
+                              fontSize: 16 * s,
                               fontWeight: FontWeight.w800,
                               letterSpacing: 0.3,
                             ),
@@ -937,8 +942,9 @@ class _HeaderCell extends StatelessWidget {
   final int flex;
   final Color color;
   final bool alignRight;
+  final double scale;
   const _HeaderCell(this.label,
-      {required this.flex, required this.color, this.alignRight = false});
+      {required this.flex, required this.color, this.alignRight = false, this.scale = 1.0});
 
   @override
   Widget build(BuildContext context) {
@@ -949,7 +955,7 @@ class _HeaderCell extends StatelessWidget {
         textAlign: alignRight ? TextAlign.right : TextAlign.left,
         style: TextStyle(
           color: color.withOpacity(0.70),
-          fontSize: 13,
+          fontSize: 13 * scale,
           fontWeight: FontWeight.w800,
           letterSpacing: 1.5,
         ),
@@ -980,6 +986,7 @@ class _NavButtonState extends State<_NavButton> {
 
   @override
   Widget build(BuildContext context) {
+    final s = (MediaQuery.of(context).size.width / 1920.0).clamp(0.40, 1.6);
     final active = widget.onTap != null;
     return GestureDetector(
       onTap: widget.onTap,
@@ -989,7 +996,7 @@ class _NavButtonState extends State<_NavButton> {
       behavior: HitTestBehavior.opaque,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 100),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 20 * s, vertical: 10 * s),
         decoration: BoxDecoration(
           color: _pressed
               ? widget.color.withOpacity(0.28)
@@ -1023,7 +1030,7 @@ class _NavButtonState extends State<_NavButton> {
                 : active
                 ? widget.color.withOpacity(0.80)
                 : widget.color.withOpacity(0.25),
-            fontSize: 13,
+            fontSize: 13 * s,
             fontWeight: FontWeight.w700,
             letterSpacing: 0.5,
           ),

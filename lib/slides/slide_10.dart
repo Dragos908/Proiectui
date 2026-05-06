@@ -474,78 +474,17 @@ class _PhotoPlaceholder10 extends StatelessWidget {
           color: const Color(0xFF00FF88).withOpacity(0.25),
           width: 1.5,
         ),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            const Color(0xFF00FF88).withOpacity(0.05),
-            const Color(0xFFFFCC00).withOpacity(0.04),
-          ],
-        ),
       ),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          ..._corners(),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(18),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: const Color(0xFF00FF88).withOpacity(0.08),
-                  border: Border.all(
-                    color: const Color(0xFF00FF88).withOpacity(0.22),
-                    width: 1,
-                  ),
-                ),
-                child: Icon(
-                  Icons.add_photo_alternate_outlined,
-                  color: const Color(0xFF00FF88).withOpacity(0.55),
-                  size: 42,
-                ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'FOTOGRAFIE',
-                style: TextStyle(
-                  color: const Color(0xFF00FF88).withOpacity(0.55),
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 2.5,
-                ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                'Avantajele conservanților',
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.30),
-                  fontSize: 11,
-                  fontWeight: FontWeight.w300,
-                  letterSpacing: 0.4,
-                ),
-              ),
-            ],
-          ),
-        ],
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Image.asset(
+          'assets/images/3.jpg', // ← schimbă cu numele fișierului tău
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
-
-  static List<Widget> _corners() {
-    const c = Color(0xFF00FF88);
-    const len = 16.0;
-    const w = 2.0;
-    return [
-      Positioned(top: 10, left: 10,  child: _CornerMark10(color: c, len: len, w: w, flipX: false, flipY: false)),
-      Positioned(top: 10, right: 10, child: _CornerMark10(color: c, len: len, w: w, flipX: true,  flipY: false)),
-      Positioned(bottom: 10, left: 10,  child: _CornerMark10(color: c, len: len, w: w, flipX: false, flipY: true)),
-      Positioned(bottom: 10, right: 10, child: _CornerMark10(color: c, len: len, w: w, flipX: true,  flipY: true)),
-    ];
-  }
 }
-
 class _CornerMark10 extends StatelessWidget {
   final Color color;
   final double len, w;

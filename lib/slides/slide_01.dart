@@ -135,7 +135,7 @@ class _S01State extends State< Slide01WhatIsApp>
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(18),
                         child: Image.asset(
-                          'assets/images/01.webp',
+                          'assets/images/1.jpg',
                           fit: BoxFit.cover,
                         ),
                       ),
