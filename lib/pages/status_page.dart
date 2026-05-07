@@ -51,7 +51,7 @@ class _StatusPageState extends State<StatusPage> {
             children: [
               // Title
               const Text(
-                'Proiect Ecologic',
+                'Proiect ',
                 style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 4),

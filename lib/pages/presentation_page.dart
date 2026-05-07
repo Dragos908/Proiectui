@@ -55,59 +55,123 @@ class _PresentationPageState extends State<PresentationPage> {
 
   bool get _currentSlideIsInteractive => _interactiveSlides.contains(_safeIndex);
 
-  // ── Web Audio API – sunet plăcut de tip "chime" ──────────────────────────
+  // ── Web Audio API – sunet cristal cu reverb, stabil și plăcut ────────────
+  // AudioContext-ul este refolosit (singleton în window) pentru stabilitate.
   void _playFuturisticSound({bool forward = true}) {
     try {
       final script = '''
 (function() {
   try {
-    var ctx = new (window.AudioContext || window.webkitAudioContext)();
+    // ── Singleton AudioContext – evită crearea repetată și click-urile audio ──
+    if (!window._slideAudioCtx || window._slideAudioCtx.state === 'closed') {
+      window._slideAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    var ctx = window._slideAudioCtx;
     if (ctx.state === 'suspended') ctx.resume();
-
-    var master = ctx.createGain();
-    master.gain.value = 0.18;
-    master.connect(ctx.destination);
 
     var now = ctx.currentTime;
     var fwd = ${forward ? 'true' : 'false'};
 
-    var freqs = fwd ? [523.25, 783.99, 1046.50]
-                    : [1046.50, 783.99, 523.25];
+    // ── Reverb simplu prin ConvolverNode cu IR sintetic ───────────────────
+    function makeReverb(ctx, duration, decay) {
+      var rate = ctx.sampleRate;
+      var length = rate * duration;
+      var impulse = ctx.createBuffer(2, length, rate);
+      for (var c = 0; c < 2; c++) {
+        var ch = impulse.getChannelData(c);
+        for (var i = 0; i < length; i++) {
+          ch[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, decay);
+        }
+      }
+      var conv = ctx.createConvolver();
+      conv.buffer = impulse;
+      return conv;
+    }
 
-    freqs.forEach(function(startF, i) {
-      var endF = fwd ? startF * 1.04 : startF * 0.96;
-      var delay = i * 0.045;
+    // ── Graf audio: osc → env → filter → dry/wet mix → master ───────────
+    var master = ctx.createGain();
+    master.gain.value = 0.22;
+    master.connect(ctx.destination);
 
-      var osc  = ctx.createOscillator();
-      var env  = ctx.createGain();
+    var reverb = makeReverb(ctx, 1.4, 3.5);
+    var reverbGain = ctx.createGain();
+    reverbGain.gain.value = 0.38;          // wet
+    reverb.connect(reverbGain);
+    reverbGain.connect(master);
 
+    var dryGain = ctx.createGain();
+    dryGain.gain.value = 0.62;             // dry
+    dryGain.connect(master);
+
+    // ── Acorduri pentatonice plăcute ──────────────────────────────────────
+    // Forward:  Do5 – Mi5 – Sol5 – Do6  (major chord ascendent)
+    // Backward: Do6 – Sol5 – Mi5 – Do5  (acord descendent, mai moale)
+    var notes = fwd
+      ? [523.25, 659.25, 783.99, 1046.50]
+      : [1046.50, 783.99, 622.25, 493.88];
+
+    var stagger = fwd ? 0.055 : 0.065;    // întârziere între note
+
+    notes.forEach(function(freq, i) {
+      var t0 = now + i * stagger;
+
+      // Oscilator principal (sine pur – cristal)
+      var osc = ctx.createOscillator();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(startF, now + delay);
-      osc.frequency.linearRampToValueAtTime(endF, now + delay + 0.25);
+      osc.frequency.value = freq;
 
-      env.gain.setValueAtTime(0, now + delay);
-      env.gain.linearRampToValueAtTime(1.0, now + delay + 0.02);
-      env.gain.setValueAtTime(1.0,  now + delay + 0.02);
-      env.gain.exponentialRampToValueAtTime(0.001, now + delay + 0.38);
+      // Armonicul 2 (triangle, mai moale decât sawtooth)
+      var osc2 = ctx.createOscillator();
+      osc2.type = 'triangle';
+      osc2.frequency.value = freq * 2.001; // ușor detunat → cordy
+
+      // Envelope cu atac rapid și decay natural
+      var env = ctx.createGain();
+      env.gain.setValueAtTime(0, t0);
+      env.gain.linearRampToValueAtTime(0.9, t0 + 0.018);
+      env.gain.setValueAtTime(0.9, t0 + 0.018);
+      env.gain.exponentialRampToValueAtTime(0.001, t0 + 0.55 + i * 0.04);
+
+      // Osc2 mai liniștit
+      var env2 = ctx.createGain();
+      env2.gain.setValueAtTime(0, t0);
+      env2.gain.linearRampToValueAtTime(0.22, t0 + 0.018);
+      env2.gain.exponentialRampToValueAtTime(0.001, t0 + 0.45);
+
+      // Low-pass filter – rotunjește tonul
+      var filt = ctx.createBiquadFilter();
+      filt.type = 'lowpass';
+      filt.frequency.setValueAtTime(fwd ? 3200 : 2400, t0);
+      filt.frequency.exponentialRampToValueAtTime(800, t0 + 0.5);
+      filt.Q.value = 0.8;
 
       osc.connect(env);
-      env.connect(master);
-      osc.start(now + delay);
-      osc.stop(now + delay + 0.40);
+      osc2.connect(env2);
+      env.connect(filt);
+      env2.connect(filt);
+      filt.connect(dryGain);
+      filt.connect(reverb);
+
+      osc.start(t0);
+      osc2.start(t0);
+      osc.stop(t0 + 0.65);
+      osc2.stop(t0 + 0.55);
     });
 
-    var sub  = ctx.createOscillator();
-    var subG = ctx.createGain();
+    // ── Sub-bass scurt – dă greutate tranzitiei ───────────────────────────
+    var sub = ctx.createOscillator();
+    var subEnv = ctx.createGain();
     sub.type = 'sine';
-    sub.frequency.value = fwd ? 261.63 : 130.81;
-    subG.gain.setValueAtTime(0, now);
-    subG.gain.linearRampToValueAtTime(0.55, now + 0.02);
-    subG.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
-    sub.connect(subG);
-    subG.connect(master);
+    sub.frequency.value = fwd ? 130.81 : 98.00;
+    subEnv.gain.setValueAtTime(0, now);
+    subEnv.gain.linearRampToValueAtTime(0.45, now + 0.015);
+    subEnv.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+    sub.connect(subEnv);
+    subEnv.connect(dryGain);
     sub.start(now);
-    sub.stop(now + 0.24);
-  } catch(e) {}
+    sub.stop(now + 0.20);
+
+  } catch(e) { console.warn('SlideSound error:', e); }
 })();
 ''';
       js.context.callMethod('eval', [script]);

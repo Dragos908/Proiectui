@@ -67,7 +67,7 @@ class _S04State extends State<Slide04Milestones>
         _ERow('E171', 'Dioxid de titan (TiO2)', 'Dulciuri, gumă, înghețată', 'TiO₂'),
         _ERow('E172', 'Oxizi de fier', 'Suplimente, capsule, decoratiuni', 'Fe₂O₃'),
       ],
-      imagePath: 'assets/images/slide04_coloranti.png',
+      imagePath: 'images/a1.jpg',
     ),
     _EPage(
       range: 'E200–E214',
@@ -87,7 +87,7 @@ class _S04State extends State<Slide04Milestones>
         _ERow('E213', 'Benzoat de calciu', 'Produse de patiserie, sosuri', 'C₁₄H₁₀CaO₄'),
         _ERow('E214', 'Para-hidroxibenzoat de etil', 'Conserve, cosmetice', 'C₉H₁₀O₃'),
       ],
-      imagePath: 'assets/images/slide04_sorbic.png',
+      imagePath: '/images/a2.jpg',
     ),
     _EPage(
       range: 'E220–E252',
@@ -108,7 +108,7 @@ class _S04State extends State<Slide04Milestones>
         _ERow('E251', 'Nitrat de sodiu', 'Carne maturata, brânzeturi', 'NaNO₃'),
         _ERow('E252', 'Nitrat de potasiu (salpetru)', 'Jambon, brânzeturi', 'KNO₃'),
       ],
-      imagePath: 'assets/images/slide04_sulfiti.png',
+      imagePath: 'assets/images/a3.jpg',
     ),
     _EPage(
       range: 'E260–E290',
@@ -129,7 +129,7 @@ class _S04State extends State<Slide04Milestones>
         _ERow('E284', 'Acid boric', 'Icre negre/rosu', 'H₃BO₃'),
         _ERow('E290', 'Dioxid de carbon (CO2)', 'Băuturi carbogazoase, bere', 'CO₂'),
       ],
-      imagePath: 'assets/images/slide04_acizi_organici.png',
+      imagePath: 'assets/images/a4.jpg',
     ),
     _EPage(
       range: 'E300–E399',
@@ -153,7 +153,7 @@ class _S04State extends State<Slide04Milestones>
         _ERow('E334', 'Acid tartric', 'Vinuri, produse de patiserie', 'C₄H₆O₆'),
         _ERow('E338', 'Acid fosforic', 'Cola, băuturi carbogazoase', 'H₃PO₄'),
       ],
-      imagePath: 'assets/images/slide04_antioxidanti.png',
+      imagePath: 'assets/images/a5.jpg',
     ),
     _EPage(
       range: 'E400–E499',
@@ -177,7 +177,7 @@ class _S04State extends State<Slide04Milestones>
         _ERow('E471', 'Mono- și digliceride acizi grași', 'Margarină, pâine', 'C₂₁H₄₂O₄'),
         _ERow('E476', 'Poliglicerol poliricinoleat (PGPR)', 'Ciocolata, sosuri', 'C₅₇H₁₀₄O₉'),
       ],
-      imagePath: 'assets/images/slide04_emulgatori.png',
+      imagePath: 'assets/images/a6.jpg',
     ),
     _EPage(
       range: 'E500–E599',
@@ -198,7 +198,7 @@ class _S04State extends State<Slide04Milestones>
         _ERow('E553b', 'Talc', 'Tablete, guma mestecat, orez', 'Mg₃Si₄O₁₀(OH)₂'),
         _ERow('E570', 'Acizi grași', 'Produse de panificație, glazuri', 'CₙH₂ₙO₂'),
       ],
-      imagePath: 'assets/images/slide04_bicarbonati.png',
+      imagePath: 'assets/images/a7.jpg',
     ),
     _EPage(
       range: 'E600–E699',
@@ -220,61 +220,7 @@ class _S04State extends State<Slide04Milestones>
         _ERow('E631', 'Inozinat disodic (IMP)', 'Chipsuri, supe, carne', 'C₁₀H₁₁N₄Na₂O₈P'),
         _ERow('E635', 'Ribonucleotide disodice', 'Chipsuri, snack-uri intense', 'C₁₀H₁₁N₄Na₂O₈P + C₁₀H₁₂N₅Na₂O₈P'),
       ],
-      imagePath: 'assets/images/slide04_potentiatori.png',
-    ),
-    _EPage(
-      range: 'E900–E999',
-      title: 'Ceară, Glazuranți și Îndulcitori',
-      accentColor: const Color(0xFFFFAA00),
-      icon: Icons.star_rounded,
-      description: 'Îndulcitorii intensivi (E950-E960) au putere de 200-13.000x față de zahăr '
-          'și sunt esențiali pentru produsele dietetice și diabetice.',
-      rows: const [
-        _ERow('E901', 'Ceara de albine', 'Bomboane, fructe glazurate', 'C₁₆H₃₂O₂'),
-        _ERow('E902', 'Ceara de candelilla', 'Guma de mestecat, bomboane', 'C₃₀H₆₂'),
-        _ERow('E903', 'Ceara de carnauba', 'Bomboane, fructe glazurate', 'C₂₄H₄₈O₂'),
-        _ERow('E904', 'Selac', 'Glazura fructe citrice, bomboane', '(C₁₅H₂₂O₅)ₙ'),
-        _ERow('E941', 'Azot (N2)', 'Ambalare MAP, lactate, cafea', 'N₂'),
-        _ERow('E942', 'Protoxid de azot (N2O)', 'Frisca presata, deserturi aerate', 'N₂O'),
-        _ERow('E948', 'Oxigen (O2)', 'Ambalare MAP, produse proaspete', 'O₂'),
-        _ERow('E950', 'Acesulfam K', 'Băuturi dietetice, produse fără zahăr', 'C₄H₄KNO₄S'),
-        _ERow('E951', 'Aspartam', 'Băuturi light, iaurturi, gumă', 'C₁₄H₁₈N₂O₅'),
-        _ERow('E952', 'Acid ciclamic / Ciclamat', 'Băuturi dietetice, deserturi', 'C₆H₁₃NO₃S'),
-        _ERow('E954', 'Zaharina și sărurile ei', 'Produse dietetice, bauturi', 'C₇H₅NO₃S'),
-        _ERow('E955', 'Sucraloza', 'Fără zahăr, băuturi, produse lactate', 'C₁₂H₁₉Cl₃O₈'),
-        _ERow('E960', 'Glicozide steviol (Stevia)', 'Produse bio fără zahăr, băuturi', 'C₃₈H₆₀O₁₈'),
-        _ERow('E965', 'Maltitol', 'Ciocolată fără zahăr, gumă', 'C₁₂H₂₄O₁₁'),
-        _ERow('E967', 'Xilitol', 'Gumă fără zahăr, produse dentare', 'C₅H₁₂O₅'),
-        _ERow('E968', 'Eritritol', 'Produse keto, dulciuri fără zahăr', 'C₄H₁₀O₄'),
-      ],
-      imagePath: 'assets/images/slide04_indulcitori.png',
-    ),
-    _EPage(
-      range: 'E1000–E1999',
-      title: 'Aditivi Suplimentari (Amidonuri Modificate)',
-      accentColor: const Color(0xFF88FFAA),
-      icon: Icons.grain_rounded,
-      description: 'Amidonurile modificate (E1400+) sunt derivate din porumb, cartofi sau grâu '
-          'și îmbunătățesc textura și stabilitatea produselor procesate.',
-      rows: const [
-        _ERow('E1103', 'Invertaze', 'Bomboane cu umplutura lichida', 'C₆H₁₂O₆'),
-        _ERow('E1200', 'Polidextroza', 'Produse cu calorii reduse', '(C₆H₁₀O₅)ₙ'),
-        _ERow('E1400', 'Dextrine, amidon prajit', 'Sosuri, supe, procesate', '(C₆H₁₀O₅)ₙ'),
-        _ERow('E1401', 'Amidon tratat cu acid', 'Patiserie, supe instant', '(C₆H₁₀O₅)ₙ'),
-        _ERow('E1402', 'Amidon tratat alcalin', 'Produse de panificație, sosuri', '(C₆H₁₀O₅)ₙ'),
-        _ERow('E1403', 'Amidon albit', 'Produse de panificație, deserturi', '(C₆H₁₀O₅)ₙ'),
-        _ERow('E1404', 'Amidon oxidat', 'Sosuri, supe, produse din carne', '(C₆H₁₀O₅)ₙ'),
-        _ERow('E1410', 'Fosfat de monoamidon', 'Produse congelate, supe instant', '(C₆H₁₀O₅)ₙ'),
-        _ERow('E1412', 'Fosfat de diamidon', 'Produse procesate, sosuri, supe', '(C₆H₁₀O₅)ₙ'),
-        _ERow('E1413', 'Fosfat de diamidon fosfatat', 'Alimente procesate, supe, sosuri', '(C₆H₁₀O₅)ₙ'),
-        _ERow('E1414', 'Fosfat de diamidon acetilat', 'Alimente congelate, carne', '(C₆H₁₀O₅)ₙ'),
-        _ERow('E1420', 'Amidon acetilat', 'Supe, sosuri, produse de patiserie', '(C₆H₁₀O₅)ₙ'),
-        _ERow('E1422', 'Adipat de diamidon acetilat', 'Produse procesate, supe', '(C₆H₁₀O₅)ₙ'),
-        _ERow('E1440', 'Hidroxipropil amidon', 'Congelate, sosuri, supe instant', '(C₆H₁₀O₅)ₙ'),
-        _ERow('E1442', 'Fosfat hidroxipropil diamidon', 'Procesate, supe, sosuri', '(C₆H₁₀O₅)ₙ'),
-        _ERow('E1450', 'Octenil succinat de amidon', 'Băuturi cu aromă, emulsii, supe', '(C₆H₁₀O₅)ₙ'),
-      ],
-      imagePath: 'assets/images/slide04_amidonuri.png',
+      imagePath: 'assets/images/a8.jpg',
     ),
   ];
 
@@ -509,7 +455,7 @@ class _S04State extends State<Slide04Milestones>
                                         ),
                                         child: Text(page.range, style: TextStyle(
                                           color: page.accentColor,
-                                          fontSize: 11 * s, fontWeight: FontWeight.w900,
+                                          fontSize: 15 * s, fontWeight: FontWeight.w900,
                                           letterSpacing: 2,
                                         )),
                                       ),
@@ -524,7 +470,7 @@ class _S04State extends State<Slide04Milestones>
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 20 * s,
+                                            fontSize: 28 * s,
                                             fontWeight: FontWeight.w900,
                                             height: 1.1,
                                             letterSpacing: -0.5,
@@ -536,7 +482,7 @@ class _S04State extends State<Slide04Milestones>
                                         page.description,
                                         style: TextStyle(
                                           color: page.accentColor.withOpacity(0.65),
-                                          fontSize: 11 * s,
+                                          fontSize: 15 * s,
                                           fontWeight: FontWeight.w300,
                                         ),
                                         maxLines: 2,
@@ -613,7 +559,7 @@ class _S04State extends State<Slide04Milestones>
                                           color: _isAutoPlaying
                                               ? page.accentColor
                                               : Colors.white.withOpacity(0.55),
-                                          fontSize: 13 * s,
+                                          fontSize: 16 * s,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -882,7 +828,7 @@ class _ETable extends StatelessWidget {
                             ),
                             child: Text(row.code, style: TextStyle(
                               color: page.accentColor,
-                              fontSize: 14 * s,
+                              fontSize: 18 * s,
                               fontWeight: FontWeight.w900,
                               letterSpacing: 0.5,
                             )),
@@ -894,7 +840,7 @@ class _ETable extends StatelessWidget {
                         flex: 3,
                         child: Text(row.name, style: TextStyle(
                           color: Colors.white,
-                          fontSize: 15 * s,
+                          fontSize: 19 * s,
                           fontWeight: FontWeight.w500,
                         )),
                       ),
@@ -903,7 +849,7 @@ class _ETable extends StatelessWidget {
                         flex: 4,
                         child: Text(row.foods, style: TextStyle(
                           color: Colors.white.withOpacity(0.60),
-                          fontSize: 13 * s,
+                          fontSize: 17 * s,
                           fontWeight: FontWeight.w400,
                         )),
                       ),
@@ -916,7 +862,7 @@ class _ETable extends StatelessWidget {
                             row.formula,
                             style: TextStyle(
                               color: page.accentColor.withOpacity(0.90),
-                              fontSize: 16 * s,
+                              fontSize: 20 * s,
                               fontWeight: FontWeight.w800,
                               letterSpacing: 0.3,
                             ),
@@ -955,7 +901,7 @@ class _HeaderCell extends StatelessWidget {
         textAlign: alignRight ? TextAlign.right : TextAlign.left,
         style: TextStyle(
           color: color.withOpacity(0.70),
-          fontSize: 13 * scale,
+          fontSize: 16 * scale,
           fontWeight: FontWeight.w800,
           letterSpacing: 1.5,
         ),
@@ -1030,7 +976,7 @@ class _NavButtonState extends State<_NavButton> {
                 : active
                 ? widget.color.withOpacity(0.80)
                 : widget.color.withOpacity(0.25),
-            fontSize: 13 * s,
+            fontSize: 16 * s,
             fontWeight: FontWeight.w700,
             letterSpacing: 0.5,
           ),

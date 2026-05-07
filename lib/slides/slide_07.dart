@@ -28,7 +28,7 @@ class _Slide07State extends State<Slide05TipuriAppWeb>
     },
     {
       'prop': 'Formula moleculară',
-      'val': 'C₇H₅NaO₂   ·   Masă moleculară: 144,11 g/mol',
+      'val': 'C₇H₅NaO₂',
     },
     {
       'prop': 'Aspect fizic',
@@ -375,15 +375,14 @@ class _Slide07State extends State<Slide05TipuriAppWeb>
                           _WarningCard(
                             title: 'Reacție chimică controversată',
                             body:
-                            'E211 + vitamina C (acid ascorbic, E300) poate produce '
+                            'Benzoatul de sodiu (E211) + vitamina C (acid ascorbic, E300) poate produce '
                                 'benzen (C₆H₆) — substanță cancerigenă dovedită, asociată '
                                 'cu leucemia. Reacția este accelerată de căldură și lumină UV.\n\n'
                                 'Din această cauză, Coca-Cola și alți producători au eliminat '
                                 'treptat benzoatul de sodiu din produsele care conțin și '
                                 'vitamina C adăugată.',
                             reaction:
-                            'E211 + E300  →  C₆H₆ + CO₂ + H₂O\n'
-                                'C₇H₅NaO₂ + C₆H₈O₆  →  benzen + CO₂ + H₂O + alte produse',
+                            'C₇H₅NaO₂ (E211) + C₆H₈O₆ (E300)  →  C₆H₆ + CO₂ + H₂O',
                             note:
                             'Cantitățile produse în condiții normale sunt mici, însă '
                                 'prezența benzenului în băuturi a generat controverse majore și '

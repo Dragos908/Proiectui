@@ -364,7 +364,7 @@ class _S09State extends State<Slide07DesktopGaming>
                                 'alimentare, potențial letală chiar și în cantități microscopice '
                                 'de toxină.\n\n'
                                 'Totodată, conferă mezelurilor culoarea roz-roșiatică '
-                                'atractivă — fără E250, produsele ar arăta gri-cenușiu, '
+                                'atractivă — fără NaNO₂ (E250), produsele ar arăta gri-cenușiu, '
                                 'neapetisant.',
                           ).animate()
                               .fadeIn(duration: 500.ms, delay: 450.ms)
@@ -378,13 +378,13 @@ class _S09State extends State<Slide07DesktopGaming>
                             icon: Icons.science_outlined,
                             title: 'Formarea nitrozaminelor',
                             body:
-                            'NaNO₂ (nitrit) + aminele din proteinele cărnii → '
+                            'NaNO₂ (E250) + aminele din proteinele cărnii → '
                                 'nitrozamine (R₂N-NO) — cancerigene și mutagene.\n\n'
                                 'Reacția este accelerată de: temperatură înaltă (prăjire, '
                                 'grătar), mediu acid (suc gastric), absența antioxidanților '
-                                '(vitamina C, E).',
+                                '(vitamina C, vitamina E).',
                             reactionLine:
-                            'E250 + amine  →  R₂N-NO  →  cancerigen',
+                            'NaNO₂ (E250) + amine  →  R₂N-NO',
                           ).animate()
                               .fadeIn(duration: 500.ms, delay: 580.ms)
                               .slideX(begin: -0.07, end: 0,
@@ -818,7 +818,7 @@ class _OmsWarning09 extends StatelessWidget {
                   const TextSpan(
                     text:
                     ' — același grup cu fumatul de tutun — în parte datorită '
-                        'nitrozaminelor formate din E250. '
+                        'nitrozaminelor formate din NaNO₂ (E250). '
                         'Reacția este accelerată de temperaturi înalte (prăjire, grătar) și de mediul acid gastric.',
                   ),
                 ],
