@@ -67,7 +67,7 @@ class _S04State extends State<Slide04Milestones>
         _ERow('E171', 'Dioxid de titan (TiO2)', 'Dulciuri, gumă, înghețată', 'TiO₂'),
         _ERow('E172', 'Oxizi de fier', 'Suplimente, capsule, decoratiuni', 'Fe₂O₃'),
       ],
-      imagePath: 'images/a1.jpg',
+      imagePath: 'assets/images/a1.jpg',
     ),
     _EPage(
       range: 'E200–E214',
@@ -87,7 +87,7 @@ class _S04State extends State<Slide04Milestones>
         _ERow('E213', 'Benzoat de calciu', 'Produse de patiserie, sosuri', 'C₁₄H₁₀CaO₄'),
         _ERow('E214', 'Para-hidroxibenzoat de etil', 'Conserve, cosmetice', 'C₉H₁₀O₃'),
       ],
-      imagePath: '/images/a2.jpg',
+      imagePath: 'assets/images/a2.jpg',
     ),
     _EPage(
       range: 'E220–E252',
