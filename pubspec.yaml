@@ -15,8 +15,49 @@ dependencies:
   flutter_animate: ^4.5.0
   qr_flutter: ^4.1.0
 
+# Pentru testele din folderul test/ (flutter test).
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/
-    - assets/
+    - assets/images/plastic/
+
+  # Fonturile din theme/text_styles.dart. Fără secțiunea asta, Flutter Web nu le
+  # găsea și afișa toate textele cu fontul implicit.
+  # JetBrains Mono e fără ligaturi de programare: `<=` rămâne `<=`, ca în Python.
+  fonts:
+    - family: Chakra Petch
+      fonts:
+        - asset: assets/fonts/chakra_petch/ChakraPetch-Light.ttf
+          weight: 300
+        - asset: assets/fonts/chakra_petch/ChakraPetch-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/chakra_petch/ChakraPetch-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/chakra_petch/ChakraPetch-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/chakra_petch/ChakraPetch-Bold.ttf
+          weight: 700
+    - family: IBM Plex Sans
+      fonts:
+        - asset: assets/fonts/ibm_plex_sans/IBMPlexSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/ibm_plex_sans/IBMPlexSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/ibm_plex_sans/IBMPlexSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/ibm_plex_sans/IBMPlexSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/ibm_plex_sans/IBMPlexSans-Bold.ttf
+          weight: 700
+    - family: JetBrains Mono
+      fonts:
+        - asset: assets/fonts/jetbrains_mono/JetBrainsMono-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/jetbrains_mono/JetBrainsMono-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/jetbrains_mono/JetBrainsMono-Bold.ttf
+          weight: 700
