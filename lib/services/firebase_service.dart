@@ -1,53 +1,85 @@
+import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:firebase_database/firebase_database.dart';
-import '../models/prezentare_state.dart';
+import '../models/presentation_state.dart';
 
 class FirebaseService {
   static final FirebaseService _instance = FirebaseService._internal();
   factory FirebaseService() => _instance;
   FirebaseService._internal();
 
-  // ─── Același nod ca aplicația Android ──────────────────────────
+  // ─── Same node as the Android app ──────────────────────────
   final DatabaseReference _ref = FirebaseDatabase.instance.ref('solide');
 
-  // Stream de stare – UI-ul web ascultă asta
-  Stream<PrezentareState> get stateStream => _ref.onValue.map((event) {
+  // State stream – the web UI listens to this
+  Stream<PresentationState> get stateStream => _ref.onValue.map((event) {
     final data = event.snapshot.value;
-    if (data == null) return const PrezentareState();
-    return PrezentareState.fromMap(data as Map<dynamic, dynamic>);
-  });
+    // Node missing or of another type (e.g. a number instead of an object) → default values
+    if (data is! Map) return const PresentationState();
+    return PresentationState.fromMap(data);
+  }).handleError((Object e) => debugPrint('[Firebase] read failed: $e'));
 
-  // Stream conexiune Firebase
+  // Firebase connection stream.
+  // NOTE: true only means "connected to the server", NOT "the rules allow
+  // access". Use initializeNode() for that.
   Stream<bool> get connectionStream => FirebaseDatabase.instance
       .ref('.info/connected')
       .onValue
       .map((e) => e.snapshot.value as bool? ?? false);
 
-  // Web poate și el schimba slide-ul (solidCurent e 1-based ca în Android)
-  Future<void> setSlide(int slideIndex) async {
-    final solidCurent = slideIndex + 1; // web e 0-based, Android e 1-based
-    await _ref.update({
-      'solidCurent': solidCurent,
-      'actiune': 'inainte',
+  // The web app can also change the slide (solidCurent is 1-based, as in Android).
+  // `forward` = true for "forward", false for "back".
+  Future<void> setSlide(int slideIndex, {required bool forward}) async {
+    final int index = slideIndex < 0 ? 0 : slideIndex;
+    await _write({
+      'solidCurent': index + 1, // web is 0-based, Android is 1-based
+      'actiune': forward ? 'inainte' : 'inapoi',
       'vibratieOK': true,
     });
   }
 
-  // Inițializare nod dacă nu există
-  Future<void> initializeNode() async {
-    final snap = await _ref.get();
-    if (!snap.exists) {
-      await _ref.set(const PrezentareState().toMap());
+  // Publishes the real number of slides so the Android app can read it
+  // instead of hard-coding it.
+  Future<void> publishTotal(int total) => _write({'totalSolide': total});
+
+  // Restarts the presentation from the cover (unused by default; see the note in the reply).
+  Future<void> resetToStart() => _write({
+        'solidCurent': 1,
+        'actiune': '',
+        'vibratieOK': false,
+      });
+
+  // Initializes the node if it does not exist. Returns false if the database
+  // cannot be read or written (usually: expired/too-strict rules, or no internet).
+  Future<bool> initializeNode() async {
+    try {
+      final snap = await _ref.get();
+      if (!snap.exists) {
+        await _ref.set(const PresentationState().toMap());
+      }
+      return true;
+    } catch (e) {
+      debugPrint('[Firebase] access denied or error: $e');
+      return false;
     }
   }
 
-  // Pornește/oprește video (câmpuri extra pentru web)
-  Future<void> setVideo({required String videoId, required bool play}) async {
-    await _ref.update({'videoId': videoId, 'videoPlay': play});
-  }
+  // Starts/stops the video (extra fields for web)
+  Future<void> setVideo({required String videoId, required bool play}) =>
+      _write({'videoId': videoId, 'videoPlay': play});
 
-  // Calculează latența (nu mai avem lastUpdate din Android, deci returnăm -1)
-  int getLatentyMs(int lastUpdate) {
+  // Computes the latency (we no longer get lastUpdate from Android, so we return -1)
+  int getLatencyMs(int lastUpdate) {
     if (lastUpdate == 0) return -1;
     return DateTime.now().millisecondsSinceEpoch - lastUpdate;
+  }
+
+  // Shared write: a write rejected by the rules no longer stays a silent error
+  // in the browser console, it shows up clearly in the log.
+  Future<void> _write(Map<String, Object?> data) async {
+    try {
+      await _ref.update(data);
+    } catch (e) {
+      debugPrint('[Firebase] write failed: $e');
+    }
   }
 }

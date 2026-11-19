@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pages/status_page.dart';
 import 'pages/presentation_page.dart';
+import 'theme/palette.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -8,20 +9,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Proiect',
+      title: 'De ce plasticul nu „moare”?',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF1A73E8),
+          seedColor: Palette.cyan,
           brightness: Brightness.dark,
         ),
         useMaterial3: true,
-        fontFamily: 'Segoe UI',
+        // Fontul de text al slide-urilor, inclus acum în proiect (pubspec.yaml).
+        fontFamily: 'IBM Plex Sans',
       ),
       initialRoute: '/',
       routes: {
         '/': (ctx) => const StatusPage(),
-        '/prezentare': (ctx) => const PresentationPage(),
+        '/presentation': (ctx) => const PresentationPage(),
       },
     );
   }
